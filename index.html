@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Blog CMS - Version 1.0</title>
+  <title>Mini Blog CMS - Version 2.0 (Dynamic Markdown CMS)</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,98 +19,139 @@
           <p class="subtitle">Markdown Content Management System</p>
         </div>
       </div>
-      <div class="version-tag">
-        <span class="badge badge-v1">Version 1.0 &bull; Static Hardcoded</span>
+      <div class="header-badges">
+        <span class="badge badge-v2">Version 2.0 &bull; Dynamic State</span>
+        <span class="badge badge-cd">⚡ CI/CD Auto-Deploy</span>
       </div>
     </div>
   </header>
 
   <main class="container main-content">
+    <!-- Hero / CMS Info Banner -->
     <section class="banner">
-      <h2>Welcome to the Developer Blog</h2>
-      <p>A lightweight platform demonstrating the evolution from hardcoded content to dynamic state management, automated unit testing, and continuous deployment.</p>
+      <div class="banner-content">
+        <h2>Mini Markdown CMS Platform</h2>
+        <p>A client-side Content Management System built with semantic HTML5, CSS3, and JavaScript array state management. Write posts in Markdown, preview in real time, and manage publishing dynamically.</p>
+        <div class="banner-stats">
+          <div class="stat-pill"><strong>Architecture:</strong> Pure ES Modules</div>
+          <div class="stat-pill"><strong>State:</strong> Dynamic JS Arrays + LocalStorage</div>
+          <div class="stat-pill"><strong>Quality:</strong> Automated Unit Tests (Node 22)</div>
+        </div>
+      </div>
     </section>
 
+    <!-- Post Creation / Editor Section -->
+    <section class="editor-section" id="editorSection">
+      <div class="card editor-card">
+        <div class="card-header">
+          <h3 id="formTitle">✍️ Create New Markdown Post</h3>
+          <div class="editor-actions">
+            <button type="button" id="livePreviewToggle" class="btn btn-secondary btn-sm">
+              👁️ Show Markdown Preview
+            </button>
+          </div>
+        </div>
+
+        <form id="postForm" class="post-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="postTitleInput">Post Title <span class="req">*</span></label>
+              <input type="text" id="postTitleInput" placeholder="e.g., Demystifying CI/CD Pipelines" required minlength="3" maxlength="120">
+            </div>
+
+            <div class="form-group">
+              <label for="postAuthorInput">Author Name <span class="req">*</span></label>
+              <input type="text" id="postAuthorInput" placeholder="e.g., Alex Rivers" required minlength="2" maxlength="60">
+            </div>
+
+            <div class="form-group">
+              <label for="postCategoryInput">Category</label>
+              <select id="postCategoryInput">
+                <option value="Guide">Guide</option>
+                <option value="Engineering">Engineering</option>
+                <option value="DevOps">DevOps</option>
+                <option value="WebDev">WebDev</option>
+                <option value="General" selected>General</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="postContentInput">Content (Markdown Supported) <span class="req">*</span></label>
+              <span class="md-hint">Supports: # H1, ## H2, **bold**, *italics*, `code`, ```blocks```, - lists, &gt; quotes</span>
+            </div>
+            <textarea id="postContentInput" rows="7" placeholder="Write your post here in Markdown format...
+# Section Header
+Here is a paragraph with **bold text** and `inline code`.
+- Point one
+- Point two" required></textarea>
+          </div>
+
+          <!-- Markdown Live Preview Box -->
+          <div id="markdownPreview" class="markdown-preview" style="display: none;">
+            <div class="preview-header">Live Markdown Preview</div>
+            <div id="previewBody" class="post-body">
+              <em>Live preview will render here...</em>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submitBtn" class="btn btn-primary">
+              🚀 Publish Post
+            </button>
+            <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">
+              Cancel Edit
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Posts Filter & Search Toolbar -->
+    <section class="toolbar-section">
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search posts by title, author, or keywords...">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Filter:</span>
+          <div id="filterButtons" class="filter-buttons">
+            <!-- Filter buttons injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Published Blog Posts -->
     <section class="posts-section">
       <div class="section-header">
-        <h3>Published Posts</h3>
-        <span class="post-count">3 Posts Available</span>
+        <div class="section-title-wrap">
+          <h3>Published Articles</h3>
+          <span class="post-count" id="postCount">Loading posts...</span>
+        </div>
+        <button id="resetDataBtn" class="btn btn-ghost btn-sm" title="Reset back to initial seed posts">
+          🔄 Reset Seed Posts
+        </button>
       </div>
 
       <div class="posts-list" id="postsContainer">
-        <!-- Post 1 (Hardcoded) -->
-        <article class="post-card" id="post-1">
-          <div class="post-header">
-            <h4 class="post-title">Getting Started with Markdown &amp; Web Development</h4>
-            <div class="post-meta">
-              <span class="meta-item"><strong>Author:</strong> Alex Rivers</span>
-              <span class="meta-item"><strong>Date:</strong> Nov 10, 2026</span>
-              <span class="meta-badge">Guide</span>
-            </div>
-          </div>
-          <div class="post-body">
-            <p>Markdown is a lightweight markup language with plain-text-formatting syntax. It is designed so that it can be converted into HTML and many other formats using an easy-to-read syntax.</p>
-            <h4>Why Markdown in CMS?</h4>
-            <ul>
-              <li><strong>Portability:</strong> Plain text files are future-proof and universal.</li>
-              <li><strong>Speed:</strong> Developers can format headings, lists, and code without switching to bulky WYSIWYG editors.</li>
-              <li><strong>Readability:</strong> Raw markdown remains human-readable before rendering.</li>
-            </ul>
-            <pre><code># Markdown Heading
-**Bold text** and *italicized text*
-- Item 1
-- Item 2</code></pre>
-          </div>
-        </article>
-
-        <!-- Post 2 (Hardcoded) -->
-        <article class="post-card" id="post-2">
-          <div class="post-header">
-            <h4 class="post-title">Why Git Branching is Crucial for Software Quality</h4>
-            <div class="post-meta">
-              <span class="meta-item"><strong>Author:</strong> Jordan Lee</span>
-              <span class="meta-item"><strong>Date:</strong> Nov 11, 2026</span>
-              <span class="meta-badge">Engineering</span>
-            </div>
-          </div>
-          <div class="post-body">
-            <p>Branching allows developers to diverge from the production line of code to experiment, implement new features, and isolate bug fixes without destabilizing the release branch.</p>
-            <blockquote>
-              "Feature branching ensures the production line remains clean and deployable at all times."
-            </blockquote>
-            <p>In modern CI/CD teams, isolated branches such as <code>main</code>, <code>development</code>, and <code>testing</code> ensure quality gates are met before code reaches end users.</p>
-          </div>
-        </article>
-
-        <!-- Post 3 (Hardcoded) -->
-        <article class="post-card" id="post-3">
-          <div class="post-header">
-            <h4 class="post-title">Continuous Deployment with GitHub Pages</h4>
-            <div class="post-meta">
-              <span class="meta-item"><strong>Author:</strong> Taylor Smith</span>
-              <span class="meta-item"><strong>Date:</strong> Nov 12, 2026</span>
-              <span class="meta-badge">DevOps</span>
-            </div>
-          </div>
-          <div class="post-body">
-            <p>Automating your deployment pipeline eliminates manual error. Every time code is merged into the default branch, automated runners execute tests and publish artifacts directly to the web.</p>
-            <p>Key benefits include:</p>
-            <ol>
-              <li>Zero-friction release cycles</li>
-              <li>Continuous validation of test suites</li>
-              <li>Immediate stakeholder feedback on live previews</li>
-            </ol>
-          </div>
-        </article>
+        <!-- Posts dynamically rendered via JS -->
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p>&copy; 2026 Mini Blog CMS &bull; Lab 8 Portfolio &amp; CMS Project</p>
-      <p class="build-info">Deployment: GitHub Pages &bull; Version 1.0 (Static Release)</p>
+      <p>&copy; 2026 Mini Blog CMS &bull; Software Engineering Lab 8</p>
+      <p class="build-info">Deployment: GitHub Pages &bull; Version 2.0 (Dynamic CMS with Automated Testing)</p>
     </div>
   </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
