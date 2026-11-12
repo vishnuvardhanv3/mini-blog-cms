@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Blog CMS - Version 1.0</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="brand">
+        <span class="brand-icon">📝</span>
+        <div>
+          <h1>Mini Blog CMS</h1>
+          <p class="subtitle">Markdown Content Management System</p>
+        </div>
+      </div>
+      <div class="version-tag">
+        <span class="badge badge-v1">Version 1.0 &bull; Static Hardcoded</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="banner">
+      <h2>Welcome to the Developer Blog</h2>
+      <p>A lightweight platform demonstrating the evolution from hardcoded content to dynamic state management, automated unit testing, and continuous deployment.</p>
+    </section>
+
+    <section class="posts-section">
+      <div class="section-header">
+        <h3>Published Posts</h3>
+        <span class="post-count">3 Posts Available</span>
+      </div>
+
+      <div class="posts-list" id="postsContainer">
+        <!-- Post 1 (Hardcoded) -->
+        <article class="post-card" id="post-1">
+          <div class="post-header">
+            <h4 class="post-title">Getting Started with Markdown &amp; Web Development</h4>
+            <div class="post-meta">
+              <span class="meta-item"><strong>Author:</strong> Alex Rivers</span>
+              <span class="meta-item"><strong>Date:</strong> Nov 10, 2026</span>
+              <span class="meta-badge">Guide</span>
+            </div>
+          </div>
+          <div class="post-body">
+            <p>Markdown is a lightweight markup language with plain-text-formatting syntax. It is designed so that it can be converted into HTML and many other formats using an easy-to-read syntax.</p>
+            <h4>Why Markdown in CMS?</h4>
+            <ul>
+              <li><strong>Portability:</strong> Plain text files are future-proof and universal.</li>
+              <li><strong>Speed:</strong> Developers can format headings, lists, and code without switching to bulky WYSIWYG editors.</li>
+              <li><strong>Readability:</strong> Raw markdown remains human-readable before rendering.</li>
+            </ul>
+            <pre><code># Markdown Heading
+**Bold text** and *italicized text*
+- Item 1
+- Item 2</code></pre>
+          </div>
+        </article>
+
+        <!-- Post 2 (Hardcoded) -->
+        <article class="post-card" id="post-2">
+          <div class="post-header">
+            <h4 class="post-title">Why Git Branching is Crucial for Software Quality</h4>
+            <div class="post-meta">
+              <span class="meta-item"><strong>Author:</strong> Jordan Lee</span>
+              <span class="meta-item"><strong>Date:</strong> Nov 11, 2026</span>
+              <span class="meta-badge">Engineering</span>
+            </div>
+          </div>
+          <div class="post-body">
+            <p>Branching allows developers to diverge from the production line of code to experiment, implement new features, and isolate bug fixes without destabilizing the release branch.</p>
+            <blockquote>
+              "Feature branching ensures the production line remains clean and deployable at all times."
+            </blockquote>
+            <p>In modern CI/CD teams, isolated branches such as <code>main</code>, <code>development</code>, and <code>testing</code> ensure quality gates are met before code reaches end users.</p>
+          </div>
+        </article>
+
+        <!-- Post 3 (Hardcoded) -->
+        <article class="post-card" id="post-3">
+          <div class="post-header">
+            <h4 class="post-title">Continuous Deployment with GitHub Pages</h4>
+            <div class="post-meta">
+              <span class="meta-item"><strong>Author:</strong> Taylor Smith</span>
+              <span class="meta-item"><strong>Date:</strong> Nov 12, 2026</span>
+              <span class="meta-badge">DevOps</span>
+            </div>
+          </div>
+          <div class="post-body">
+            <p>Automating your deployment pipeline eliminates manual error. Every time code is merged into the default branch, automated runners execute tests and publish artifacts directly to the web.</p>
+            <p>Key benefits include:</p>
+            <ol>
+              <li>Zero-friction release cycles</li>
+              <li>Continuous validation of test suites</li>
+              <li>Immediate stakeholder feedback on live previews</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Mini Blog CMS &bull; Lab 8 Portfolio &amp; CMS Project</p>
+      <p class="build-info">Deployment: GitHub Pages &bull; Version 1.0 (Static Release)</p>
+    </div>
+  </footer>
+</body>
+</html>
