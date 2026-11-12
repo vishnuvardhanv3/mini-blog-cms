@@ -87,8 +87,8 @@ export function parseMarkdown(markdown) {
     return `<pre><code>${code.trim()}</code></pre>`;
   });
 
-  // Step 3: Blockquotes (> quote)
-  html = html.replace(/^>\s?(.*)$/gm, '<blockquote>$1</blockquote>');
+  // Step 3: Blockquotes (> or &gt; quote)
+  html = html.replace(/^(&gt;|>)\s?(.*)$/gm, '<blockquote>$2</blockquote>');
   // Combine consecutive blockquotes
   html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
 
